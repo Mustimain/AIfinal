@@ -32,23 +32,20 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="output-text" class="form-label">Predicted Emotion:</label>
+                <label for="output-text" class="form-label">Tahmin Edilen Duygu:</label>
                 <textarea class="form-control" id="output-text" name="output-text" rows="4" cols="50" readonly></textarea>
             </div>
-            <button type="button" class="btn btn-primary" id="predict-button">Predict Emotion</button>
+            <button type="button" class="btn btn-primary" id="predict-button">Duyguyu Tahmin Et</button>
         </form>
     </div>
 
-    <!-- Bootstrap JavaScript dosyasını ekleyin -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-G0J/L0GEdqr0E+KOI+ZnuFh6NQcRbTpIeP6Z14JUWAnPpxnvKM/H4rDZclNn2wBl" crossorigin="anonymous"></script>
 
     <script>
         document.getElementById("predict-button").addEventListener("click", function() {
-            // Input text
+
             var inputText = document.getElementById("input-text").value;
-            // Selected algorithm
             var selectedAlgorithm = document.getElementById("algorithm-select").value;
-            // POST request to send input text and selected algorithm to the backend
             fetch("/predict/" + selectedAlgorithm, {
                 method: "POST",
                 headers: {
@@ -60,7 +57,6 @@
             })
             .then(response => response.json())
             .then(data => {
-                // Display predicted emotion in the output textarea
                 console.log(data)
                 document.getElementById("output-text").innerHTML = data.predictions[0];
             })
